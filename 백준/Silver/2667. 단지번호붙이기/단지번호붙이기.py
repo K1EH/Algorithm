@@ -1,31 +1,28 @@
 N = int(input())
-
 grid = []
+
 for _ in range(N):
     grid.append(input())
 
-dx = [1, -1, 0, 0]
-dy = [0, 0, 1, -1]
-
 visited = [[False] * N for _ in range(N)]
 
-def DFS(x, y):
-    global count
-    visited[x][y] = True
-    count += 1
-    for i in range(4):
-        nx = x + dx[i]
-        ny = y + dy[i]
-        if 0<= nx < N and 0<= ny < N and not visited[nx][ny] and grid[nx][ny] == '1':
-            DFS(nx, ny)
+direction = [(1, 0), (-1, 0), (0, -1), (0, 1)]
 
-result = []
-for x in range(N):
-    for y in range(N):
-        if grid[x][y] == '1' and not visited[x][y]:
-            count = 0
-            DFS(x, y)
-            result.append(count)
-print(len(result))
-for i in sorted(result):
-    print(i)
+def dfs(y, x):
+    visited[y][x] = True
+    count = 1
+    for dy, dx in direction:
+        ny = y + dy
+        nx = x + dx
+        if (0 <= ny < N and 0 <= nx < N) and not visited[ny][nx] and grid[ny][nx] == '1':
+                count += dfs(ny, nx)
+    return count
+res = []
+for i in range(N):
+    for j in range(N):
+        if grid[i][j] == '1' and not visited[i][j]:
+            res.append(dfs(i, j))
+res.sort()
+print(len(res))
+for i in res:
+     print(i)

@@ -1,11 +1,14 @@
 import sys
 input = sys.stdin.readline
+
 N = int(input())
-l = []
-for i in range(N):
-    l.append(list(map(int, input().split())))
-l.sort()
+arr = []
+for _ in range(N):
+    x, y = map(int, input().split())
+    arr.append([x, y])
+arr.sort(key = lambda x: (x[0], x[1]))
 
 
-for i in range(N):
-    print(*l[i])
+for a in arr:
+    x, y = a
+    print(x, y)

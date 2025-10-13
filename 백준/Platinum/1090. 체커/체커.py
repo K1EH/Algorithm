@@ -1,30 +1,28 @@
-import sys
-import heapq
+def cal_dist(p1, p2):
+    (x1, y1), (x2, y2) = p1, p2
+    return abs(x1 - x2) + abs(y1 - y2)
 
-N = int(sys.stdin.readline())
+N = int(input())
+
 INF = 1e9
-checkers = [list(map(int, input().split())) for _ in range(N)]
+ans = [INF] * N
+ans[0] = 0
 
-checker_x = sorted([checkers[i][0] for i in range(N)])
-checker_y = sorted([checkers[i][1] for i in range(N)])
+coordinates = [list(map(int, input().split())) for _ in range(N)]
+xs, ys = [], []
+for coordinate in coordinates:
+    xs.append(coordinate[0])
+    ys.append(coordinate[1])
 
+for x in xs:
+    for y in ys:
+        dist = []
+        for coordinate in coordinates:
+            dist.append(cal_dist([x, y], coordinate))
+        dist.sort()
+        for i in range(1, len(dist)):
+            dist[i] = dist[i - 1] + dist[i]
+            if dist[i] < ans[i]:
+                ans[i] = dist[i]
 
-answer = [INF] * N
-# 체커 하나가 모이는 경우는 이동 X
-answer[0] = 0
-# 보드 수를 최소화
-for x in checker_x:
-    for y in checker_y:
-        # x, y 칸까지 각 기물의 이동 횟수
-        move = []
-        # 체커의 이동 거리는 abs(x - dx) + abs(y - dy)
-        for dx, dy in checkers:
-            count = abs(x - dx) + abs(y - dy)
-            heapq.heappush(move, count)
-        # 정렬된 move 배열에서 최소 k개 기물이 모이는 이동 거리의 합은 sum(move[: k + 1])
-        pop = 0
-        for i in range(N):
-            pop += heapq.heappop(move)
-            if answer[i] > pop:
-                answer[i] = pop
-print(*answer)
+print(*ans)

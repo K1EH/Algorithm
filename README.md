@@ -44,15 +44,10 @@
 
 ## 📊 Problem Statistics
 
-| Category | Folder | Count |
-|-----------|---------|--------|
-| BaekjoonHub (Auto) | `백준/` | 60 |
+| Platform | Folder | Problem Count |
+|-----------|---------|----------------|
+| Baekjoon (Auto) | `백준/` | 60 |
 | Programmers (Auto) | `프로그래머스/` | 53 |
-| Book Problems | `이것이_취업을_위한_코딩테스트다/` | 0 |
-| Inflearn Course | `inflearn_2week_algorithm/` | 25 |
-| Local Workspace | `baekjoon/` | 7 |
-| Personal Notes | `Algorithm_Note/` | 0 |
 
 _Last updated automatically._
-
 <!-- stats:end -->

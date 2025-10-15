@@ -46,8 +46,8 @@
 
 | Platform | Folder | Problem Count |
 |-----------|---------|----------------|
-| Baekjoon (Auto) | `백준/` | 60 |
+| BaekjoonHub (Auto) | `백준/` | 60 |
 | Programmers (Auto) | `프로그래머스/` | 53 |
 
-_Last updated automatically._
+_Last updated: 2025-10-15_
 <!-- stats:end -->

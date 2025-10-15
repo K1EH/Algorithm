@@ -39,3 +39,20 @@
 ## 🧘‍♂️ Study Goal
 > 백준허브 자동 업로드 + 교재 & 온라인 강의 + 개인 학습 코드를  
 > 체계적으로 관리하며 꾸준히 알고리즘 공부하기 !
+
+<!-- stats:start -->
+
+## 📊 Problem Statistics
+
+| Category | Folder | Count |
+|-----------|---------|--------|
+| BaekjoonHub (Auto) | `백준/` | 60 |
+| Programmers (Auto) | `프로그래머스/` | 6 |
+| Book Problems | `이것이_취업을_위한_코딩테스트다/` | 0 |
+| Inflearn Course | `inflearn_2week_algorithm/` | 25 |
+| Local Workspace | `baekjoon/` | 7 |
+| Personal Notes | `Algorithm_Note/` | 0 |
+
+_Last updated automatically._
+
+<!-- stats:end -->

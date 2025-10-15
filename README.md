@@ -9,12 +9,12 @@
 
 | Folder | Description |
 |--------|--------------|
-| `백준/` | Automatically pushed by [BaekjoonHub](https://github.com/BaekjoonHub/BaekjoonHub) |
-| `프로그래머스/` | Programmers problem solutions (auto-pushed) |
-| `Algorithm_Note/` | Personal algorithm notes & summaries |
-| `baekjoon/` | Local in-progress solutions (workbench) |
-| `이것이_취업을_위한_코딩테스트다/` | Problem solutions from the algorithm book |
-| `inflearn_2week_algorithm/` | Notes from Inflearn’s 2-week algorithm course |
+| `백준/` | **Auto-updated folder** — automatically pushed by [BaekjoonHub](https://github.com/BaekjoonHub/BaekjoonHub) |
+| `프로그래머스/` | **Auto-updated folder** — automatically pushed from Programmers problems |
+| `이것이_취업을_위한_코딩테스트다/` | **Book-based study** — solutions from “이것이 취업을 위한 코딩테스트다” |
+| `inflearn_2week_algorithm/` | **Course-based study** — notes from [2주만에 통과하는 알고리즘 코딩테스트 (Inflearn)](https://www.inflearn.com/course/2%EC%A3%BC%EB%A7%8C%EC%97%90-%ED%86%B5%EA%B3%BC%ED%95%98%EB%8A%94-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8/) |
+| `Algorithm_Note/` | **Personal notes** — algorithm concepts, templates, and problem summaries |
+| `baekjoon/` | **Personal workspace** — locally solved problems or experiments outside auto-push |
 
 ---
 
@@ -37,5 +37,5 @@
 ---
 
 ## 🧘‍♂️ Study Goal
-> 백준허브 자동 업로드 + 교재 & 강의 풀이를 한 레포에 통합 관리
-> 꾸준히 알고리즘 학습 과정을 기록
+> 백준허브 자동 업로드 + 교재 & 온라인 강의 + 개인 학습 코드를  
+> 체계적으로 관리하며 꾸준히 알고리즘 공부하기 !

@@ -1,26 +1,42 @@
-def dfs(x, y):
-    visited[x][y] = True
-    for dx, dy in directions:
-        nx, ny = x + dx, y + dy
-        if 0 <= nx < n and 0 <= ny < m and not visited[nx][ny]:
-            dfs(nx, ny)
+# 그래프 정의 (양방향)
+graph = {
+    "A": ["B", "C"],
+    "B": ["A", "D"],
+    "C": ["A", "E", "F"],
+    "D": ["B"],
+    "E": ["C", "G"],
+    "F": ["C"],
+    "G": ["E"],
+}
 
-# 호출
-dfs(start_x, start_y)
+
+def dfs(graph, node, visited):
+    visited.add(node)
+    print(node, end=" ")
+    for next in graph[node]:
+        if next not in visited:
+            dfs(graph, next, visited)
+
+
+visited = set()
+dfs(graph, "A", visited)
 
 from collections import deque
 
-def bfs(x, y):
-    q = deque([(x, y)])
-    visited[x][y] = True
+print()
 
-    while q:
-        x, y = q.popleft()
-        for dx, dy in directions:
-            nx, ny = x + dx, y + dy
-            if 0 <= nx < n and 0 <= ny < m and not visited[nx][ny]:
-                visited[nx][ny] = True
-                q.append((nx, ny))
 
-# 호출
-bfs(start_x, start_y)
+def bfs(graph, start, visited):
+    queue = deque([start])
+    visited.add(start)
+    while queue:
+        node = queue.popleft()
+        print(node, end=" ")
+        for next in graph[node]:
+            if next not in visited:
+                queue.append(next)
+                visited.add(next)
+
+
+visited = set()
+bfs(graph, "A", visited)

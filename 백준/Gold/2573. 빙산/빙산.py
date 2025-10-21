@@ -57,8 +57,7 @@ while True:
 
     # bfs검사
     visited = [[False] * M for _ in range(N)]
-    for i in range(len(ice)):
-        y, x = ice[i][0], ice[i][1]
+    for y, x in candidates:
         if grid[y][x] > 0 and not visited[y][x]:
             bfs(grid, (y, x), visited)
             count += 1

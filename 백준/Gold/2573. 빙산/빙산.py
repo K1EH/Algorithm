@@ -1,7 +1,7 @@
 from collections import deque
 
 
-def bfs(grid, start, visited):
+def bfs(graph, start, visited):
     y, x = start
     queue = deque([(y, x)])
     visited[y][x] = True
@@ -11,7 +11,7 @@ def bfs(grid, start, visited):
             ny, nx = y + dy, x + dx
             if (
                 (0 <= ny < N and 0 <= nx < M)
-                and grid[ny][nx] > 0
+                and graph[ny][nx] > 0
                 and not visited[ny][nx]
             ):
                 queue.append((ny, nx))
@@ -20,46 +20,46 @@ def bfs(grid, start, visited):
 
 # Input
 N, M = map(int, input().split())
-grid = [list(map(int, input().split())) for _ in range(N)]
+graph = [list(map(int, input().split())) for _ in range(N)]
 directions = ((1, 0), (-1, 0), (0, -1), (0, 1))
 
 year = 0
 
-candidates = []
+ice_pos = []
 # list up current position of iceberg
 for y in range(1, N - 1):
     for x in range(1, M - 1):
-        if grid[y][x] > 0:
+        if graph[y][x] > 0:
             # y, x, water
-            candidates.append([y, x])
+            ice_pos.append([y, x])
 
 # At each year
 while True:
     count = 0
-    ice = []
-    for c in candidates:
-        ice.append([c[0], c[1], 0])
+    info = []
+    for p in ice_pos:
+        info.append([p[0], p[1], 0])
 
     # counting the number of seas near by iceberg
-    for i in range(len(ice)):
-        y, x = ice[i][0], ice[i][1]
+    for i in range(len(info)):
+        y, x = info[i][0], info[i][1]
         for dy, dx in directions:
             ny, nx = y + dy, x + dx
-            if (0 <= ny < N and 0 <= nx < M) and grid[ny][nx] == 0:
-                ice[i][2] += 1
+            if (0 <= ny < N and 0 <= nx < M) and graph[ny][nx] == 0:
+                info[i][2] += 1
     # updating height of ice
-    candidates = []
-    for i in range(len(ice)):
-        y, x = ice[i][0], ice[i][1]
-        grid[y][x] = max(0, grid[y][x] - ice[i][2])
-        if grid[y][x] > 0:
-            candidates.append([y, x])
+    ice_pos = []
+    for i in range(len(info)):
+        y, x = info[i][0], info[i][1]
+        graph[y][x] = max(0, graph[y][x] - info[i][2])
+        if graph[y][x] > 0:
+            ice_pos.append([y, x])
 
     # bfs검사
     visited = [[False] * M for _ in range(N)]
-    for y, x in candidates:
-        if grid[y][x] > 0 and not visited[y][x]:
-            bfs(grid, (y, x), visited)
+    for y, x in ice_pos:
+        if graph[y][x] > 0 and not visited[y][x]:
+            bfs(graph, (y, x), visited)
             count += 1
     year += 1
 

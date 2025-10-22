@@ -1,17 +1,17 @@
-def recursion(N, start, end, line):
-    if N == 1:
-        return
-    third = (end - start + 1) // 3
-    line[start + third : start + 2 * third] = " " * third
-    recursion(third, start, start + third - 1, line)
-    recursion(third, start + 2 * third, end, line)
+def recursion(line, N):
+    if N - 1 < 0:
+        return line
+    erase = 3 ** (N - 1)
+    left = line[:erase]
+    mid = [" "] * erase
+    right = line[erase * 2 :]
+    return recursion(left, N - 1) + mid + recursion(right, N - 1)
 
 
 while True:
     try:
         N = int(input())
         line = ["-"] * (3**N)
-        recursion(3**N, 0, 3**N - 1, line)
-        print("".join(line))
+        print("".join(recursion(line, N)))
     except:
-        break
+        exit(0)

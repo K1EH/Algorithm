@@ -1,8 +1,11 @@
 T = int(input())
+
+dp = [-1] * 101
+dp[1:4] = 1, 1, 1
 for _ in range(T):
     N = int(input())
-    dp = [0, 1, 1, 1, 2, 2, 3, 4, 5, 7]
-    if N >= 10:
-        for i in range(10, N + 1):
-            dp.append(dp[i - 1]+ dp[i - 5])
+    for i in range(3, N + 1):
+        if dp[i] != -1:
+            continue
+        dp[i] = dp[i - 2] + dp[i - 3]
     print(dp[N])

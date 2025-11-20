@@ -1,19 +1,13 @@
 N = int(input())
 
-RGB = [[0, 0, 0]]
+house = [list(map(int, input().split())) for _ in range(N)]
+# R, G, B
+dp = [[0] * 3 for _ in range(N)]
+dp[0] = house[0]
 
-for _ in range(N):
-    RGB.append(list(map(int, input().split())))
-#print(RGB)
+for i in range(1, N):
+    dp[i][0] = house[i][0] + min(dp[i - 1][1], dp[i - 1][2])
+    dp[i][1] = house[i][1] + min(dp[i - 1][0], dp[i - 1][2])
+    dp[i][2] = house[i][2] + min(dp[i - 1][0], dp[i - 1][1])
 
-DP = [0] * (N + 1)
-DP[1] = min(RGB[1])
-#print(DP)
-
-for i in range(2, N + 1):
-    RGB[i][0] += min(RGB[i-1][1], RGB[i-1][2])
-    RGB[i][1] += min(RGB[i-1][0], RGB[i-1][2])
-    RGB[i][2] += min(RGB[i-1][0], RGB[i-1][1])
-
-    DP[i] = min(RGB[i][0], RGB[i][1], RGB[i][2])
-print(DP[N])
+print(min(dp[N - 1]))

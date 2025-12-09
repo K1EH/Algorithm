@@ -1,7 +1,7 @@
 N = int(input())
 
 house = [list(map(int, input().split())) for _ in range(N)]
-# R, G, B
+
 dp = [[0] * 3 for _ in range(N)]
 dp[0] = house[0]
 

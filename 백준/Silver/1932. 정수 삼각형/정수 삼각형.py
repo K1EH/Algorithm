@@ -1,14 +1,16 @@
-N = int(input())
-triangle = []
+H = int(input())
 
-for _ in range(N):
-    triangle.append(list(map(int, input().split())))
-for i in range(1, N):
-    for k in range(i+1):
-        if k == 0:
-            triangle[i][k] += triangle[i-1][k]
-        elif k == i:
-            triangle[i][k] += triangle[i-1][k-1]
+dp = []
+for _ in range(H):
+    dp.append(list(map(int, input().split())))
+
+for i in range(1, H):
+    for j in range(i + 1):
+        if j == 0:
+            dp[i][j] += dp[i - 1][j]
+        elif j == i:
+            dp[i][j] += dp[i - 1][j - 1]
         else:
-            triangle[i][k] += max(triangle[i-1][k], triangle[i-1][k-1])
-print(max(triangle[N - 1]))
+            dp[i][j] += max(dp[i - 1][j - 1], dp[i - 1][j])
+
+print(max(dp[H - 1]))

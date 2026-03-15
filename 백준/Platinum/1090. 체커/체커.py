@@ -1,28 +1,21 @@
-def cal_dist(p1, p2):
-    (x1, y1), (x2, y2) = p1, p2
-    return abs(x1 - x2) + abs(y1 - y2)
-
-N = int(input())
-
 INF = 1e9
-ans = [INF] * N
-ans[0] = 0
+N = int(input())
+answer = [INF] * N
+answer[0] = 0
 
-coordinates = [list(map(int, input().split())) for _ in range(N)]
-xs, ys = [], []
-for coordinate in coordinates:
-    xs.append(coordinate[0])
-    ys.append(coordinate[1])
-
+checkers = [list(map(int, input().split())) for _ in range(N)]
+xs = [x for x, y in checkers]
+ys = [y for x, y in checkers]
 for x in xs:
     for y in ys:
-        dist = []
-        for coordinate in coordinates:
-            dist.append(cal_dist([x, y], coordinate))
-        dist.sort()
-        for i in range(1, len(dist)):
-            dist[i] = dist[i - 1] + dist[i]
-            if dist[i] < ans[i]:
-                ans[i] = dist[i]
+        move = []
+        for checker in checkers:
+            dx, dy = checker
+            move.append(abs(x - dx) + abs(y - dy))
+        move.sort()
 
-print(*ans)
+        for i in range(1, N):
+            candidate = sum(move[: i + 1])
+            if answer[i] > candidate:
+                answer[i] = candidate
+print(*answer)

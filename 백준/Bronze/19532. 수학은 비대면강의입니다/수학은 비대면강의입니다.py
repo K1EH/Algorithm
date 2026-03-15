@@ -1,6 +1,5 @@
 a, b, c, d, e, f = map(int, input().split())
-det = a * e - b * d
-detv1 = c * e - b * f
-detv2 = a * f - c * d
-
-print(detv1 // det, detv2 // det)
+for x in range(-999, 1000):
+    for y in range(-999, 1000):
+        if a * x + b * y == c and d * x + e * y == f:
+            print(x, y)

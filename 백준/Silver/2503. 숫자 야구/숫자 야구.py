@@ -1,42 +1,35 @@
 N = int(input())
-
-answer = 0
-
-hint = list(list(map(int, input().split())) for _ in range(N))
-
-for a in range(1, 10):
-    for b in range(1, 10):
-        for c in range(1, 10):
-            if a == b or b == c or c == a:
-                continue
-            count = 0
-            for arr in hint:
-                strike_count = 0
-                ball_count = 0
-                num = arr[0]
-                strike = arr[1]
-                ball = arr[2]
-
-                first = num // 100
-                second = (num // 10) % 10
-                third = num % 10
-
-                ### strike, ball 검증 ###
-                if a == first:
-                    strike_count += 1
-                elif a in [second, third]:
-                    ball_count += 1
-                if b == second:
-                    strike_count += 1
-                elif b in [first, third]:
-                    ball_count += 1
-                if c == third:
-                    strike_count += 1
-                elif c in [first, second]:
-                    ball_count += 1
-
-                if strike == strike_count and ball == ball_count:
-                    count += 1
-            if N == count:
-                answer += 1
-print(answer)
+li = []
+count = 0
+for _ in range(N):
+    li.append(list(map(int, input().split())))
+for case in range(123, 999):
+    case = str(case)
+    if (
+        case[0] == case[1]
+        or case[1] == case[2]
+        or case[2] == case[0]
+        or case[0] == '0'
+        or case[1] == '0'
+        or case[2] == '0'
+    ):
+        continue
+    for guess, strike, ball in li:
+        (
+            s,
+            b,
+        ) = (
+            0,
+            0,
+        )
+        guess = str(guess)
+        for i in range(3):
+            if case[i] == guess[i]:
+                s += 1
+            if guess[i] in case:
+                b += 1
+        if strike != s or ball != b - s:
+            break
+    else:
+        count += 1
+print(count)

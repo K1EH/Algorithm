@@ -1,16 +1,18 @@
 INF = 1e9
 
 N = int(input())
-checkers = [list(map(int, input().split())) for _ in range(N)]
-
 answer = [INF] * N
 answer[0] = 0
+checkers = [list(map(int, input().split())) for _ in range(N)]
 
-for dx, _ in checkers:
-    for _, dy in checkers:
+xs = [x for x, _ in checkers]
+ys = [y for _, y in checkers]
+
+for x in xs:
+    for y in ys:
         move = []
-        for x, y in checkers:
-            move.append(abs(x - dx) + abs(y - dy))
+        for cx, cy in checkers:
+            move.append(abs(x - cx) + abs(y - cy))
         move.sort()
         for i in range(N):
             if answer[i] > sum(move[: i + 1]):

@@ -1,25 +1,19 @@
 N = int(input())
-columns = [list(map(int, input().split())) for _ in range(N)]
-columns.sort(key=lambda x: x[0])
+ans = 0
+columns = []
+for _ in range(N):
+    columns.append(list(map(int, input().split())))
+columns.sort()
 
-ml, mh = max(columns, key=lambda x: x[1])
 
-ll, lh, rl, rh = 0, 0, 1000, 0
-area = 0
+idx = columns.index(max(columns, key=lambda x: x[1]))
+left_columns = columns[: idx + 1]
+right_columns = sorted(columns[idx:], reverse=True)
 
-for l in range(N):
-    cl, ch = columns[l]
-    if lh < ch:
-        area += (cl - ll) * lh
-        ll, lh = cl, ch
-    if ch == mh:
-        break
-for r in range(N - 1, -1, -1):
-    cl, ch = columns[r]
-    if rh < ch:
-        area += (rl - cl) * rh
-        rl, rh = cl, ch
-    if ch == mh:
-        break
-area += (rl - ll + 1) * mh
-print(area)
+for col in [left_columns, right_columns]:
+    pos, height = col[0]
+    for p, h in col[1:]:
+        if h >= height:
+            ans += abs(p - pos) * height
+            pos, height = p, h
+print(ans + columns[idx][1])

@@ -1,29 +1,31 @@
 import sys
 
 input = sys.stdin.readline
+
 INF = 1e9
-
 N, H = map(int, input().split())
-obj = list(int(input()) for _ in range(N))
+columns = []
+ans, count = INF, 0
 
-prefix_sum = [0] * (H + 1)
+for _ in range(N):
+    columns.append(int(input()))
+imos = list(0 for _ in range(H))
 
 for i in range(N):
-    length = obj[i]
-    # 석순
-    if i % 2 == 0:
-        prefix_sum[1] += 1
-        prefix_sum[1 + length] -= 1
-    # 종유순
-    else:
-        prefix_sum[-length] += 1
 
-min_obj, count = INF, 0
-for i in range(1, H + 1):
-    prefix_sum[i] += prefix_sum[i - 1]
-    if prefix_sum[i] < min_obj:
-        min_obj = prefix_sum[i]
+    if i % 2 == 0:  # even
+        imos[0] += 1
+        imos[columns[i]] -= 1
+    else:  # odd
+        imos[H - columns[i]] += 1
+
+prefix = [0 for _ in range(H + 1)]
+
+for i in range(H):
+    prefix[i + 1] = prefix[i] + imos[i]
+    if ans > prefix[i + 1]:
+        ans = prefix[i + 1]
         count = 1
-    elif prefix_sum[i] == min_obj:
+    elif ans == prefix[i + 1]:
         count += 1
-print(min_obj, count)
+print(ans, count)

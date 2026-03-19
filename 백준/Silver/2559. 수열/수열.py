@@ -1,18 +1,12 @@
-n, interval = map(int, input().split())
+N, interval = map(int, input().split())
 
-temperature = list(map(int, input().split()))
+days = list(map(int, input().split()))
+prefix = [0 for _ in range(N + 1)]
+for i in range(N):
+    prefix[i + 1] = prefix[i] + days[i]
 
-prefix_sum = [0 for _ in range(n + 1)]
+interval_sum = []
+for i in range(interval, N + 1):
+    interval_sum.append(prefix[i] - prefix[i - interval])
 
-for i in range(n):
-    prefix_sum[i + 1] = prefix_sum[i] + temperature[i]
-if interval == 1:
-    print(max(temperature))
-
-else:
-    max = -1e9
-    for p in range(interval, n + 1):
-        temp = prefix_sum[p] - prefix_sum[p - interval]
-        if max < temp:
-            max = temp
-    print(max)
+print(max(interval_sum))

@@ -1,22 +1,17 @@
-def sieve(N):
-    is_prime = [True] * (N + 1)
+def sieve(n):
+    is_prime = [True] * (n + 1)
     is_prime[0] = is_prime[1] = False
-    for i in range(2, int(N**0.5) + 1):
-        if is_prime[i]:
-            for j in range(i * i, N + 1, i):
-                is_prime[j] = False
-    prime = [i for i, p in enumerate(is_prime) if p]
-    return prime
-
+    for prime in range(2, int(n**0.5)):
+        if is_prime[prime]:
+            for multiple in range(prime**2, n + 1, prime):
+                is_prime[multiple] = False
+    return [i for i in range(2, n + 1) if is_prime[i]]
 
 N = int(input())
-prime = sieve(int(N ** 0.5) + 1)
-idx = 0
-
-for p in prime:
-    while N % p == 0:
-        print(p)
-        N //= p
-
-if N!= 1:
+primes = sieve(int(N**0.5) + 1)
+for prime in primes:
+    while N % prime == 0:
+        print(prime)
+        N //= prime
+if N != 1:
     print(N)

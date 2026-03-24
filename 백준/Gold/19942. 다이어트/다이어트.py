@@ -1,29 +1,38 @@
 N = int(input())
-mp, mf, ms, mv = map(int, input().split())
+minimum = list(map(int, input().split()))
 ingredient = [list(map(int, input().split())) for _ in range(N)]
-arr = []
-ans = []
-cost = N * 500 + 1
+
+answer = []
 
 
-def rec(idx, p, f, s, v, c):
-    global cost, ans
+def recursion(idx, arr, cost, numbers):
+    global answer
     if idx == N:
-        if mp <= p and mf <= f and ms <= s and mv <= v:
-            if c < cost or (c == cost and (arr == [] or ans > arr)):
-                cost = c
-                ans = arr[:]
+        for i in range(4):
+            if not (arr[i] >= minimum[i]):
+                break
+        else:
+            answer.append([cost, numbers])
         return
-    np, nf, ns, nv, nc = ingredient[idx]
-    arr.append(idx + 1)
-    rec(idx + 1, p + np, f + nf, s + ns, v + nv, c + nc)
-    arr.pop()
-    rec(idx + 1, p, f, s, v, c)
+
+    recursion(
+        idx + 1,
+        [arr[i] + ingredient[idx][i] for i in range(4)],
+        cost + ingredient[idx][4],
+        numbers + [idx + 1],
+    )
+    recursion(
+        idx + 1,
+        arr,
+        cost,
+        numbers,
+    )
 
 
-rec(0, 0, 0, 0, 0, 0)
-if ans:
-    print(cost)
-    print(*ans)
+recursion(0, [0, 0, 0, 0], 0, [])
+answer.sort()
+if answer:
+    print(answer[0][0])
+    print(*answer[0][1])
 else:
     print(-1)

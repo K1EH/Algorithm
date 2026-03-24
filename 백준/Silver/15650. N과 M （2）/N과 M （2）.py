@@ -1,20 +1,15 @@
 N, M = map(int, input().split())
-
-
-def recursion(number):
-    if number == M:
-        result.append(" ".join(map(str, arr)))
-        return
-    start = arr[-1] + 1 if arr else 1
-    for i in range(start, N + 1):
-        if not i in arr:
-            arr.append(i)
-            recursion(number + 1)
-            arr.pop()
-
-
 arr = []
-result = []
 
-recursion(0)
-print("\n".join(result))
+
+def recursion(n):
+    if len(arr) == M:
+        print(*arr)
+        return
+    for i in range(n, N + 1):
+        arr.append(i)
+        recursion(i + 1)
+        arr.pop()
+
+
+recursion(1)

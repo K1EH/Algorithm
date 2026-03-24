@@ -1,19 +1,20 @@
 N = int(input())
-table = [list(map(int, input().split())) for _ in range(N)]
+schedule = [list(map(int, input().split())) for _ in range(N)]
+
 ans = 0
 
 
-def rec(idx, profit):
+def recursion(idx, money):
     global ans
     if idx == N:
-        if ans < profit:
-            ans = profit
+        if ans < money:
+            ans = money
         return
-    t, p = table[idx]
-    if idx + t <= N:
-        rec(idx + t, profit + p)
-    rec(idx + 1, profit)
+    duration, profit = schedule[idx]
+    if idx + duration <= N:
+        recursion(idx + duration, money + profit)
+    recursion(idx + 1, money)
 
 
-rec(0, 0)
+recursion(0, 0)
 print(ans)

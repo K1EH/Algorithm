@@ -1,18 +1,19 @@
 N, M = map(int, input().split())
-nums = list(map(int, input().split()))
-nums.sort()
+nums = sorted(list(map(int, input().split())))
+
+visited = [False] * N
+arr = []
 
 
-def recursion(number):
-    if number == M:
-        result.append(" ".join(map(str, arr)))
-    for n in nums:
-        if n not in arr:
-            arr.append(n)
-            recursion(number + 1)
+def recursion():
+    if len(arr) == M:
+        print(*arr)
+        return
+    for i, v in enumerate(nums):
+        if not visited[i]:
+            visited[i] = True
+            arr.append(v)
+            recursion()
             arr.pop()
-
-
-arr, result = [], []
-recursion(0)
-print("\n".join(result))
+            visited[i] = False
+recursion()

@@ -1,17 +1,16 @@
 N, M = map(int, input().split())
 nums = sorted(list(map(int, input().split())))
-arr, res = [], []
+arr = []
 
 
-def rec(n):
-    if n == M:
-        res.append(" ".join(map(str, arr)))
+def recursion():
+    if len(arr) == M:
+        print(*arr)
         return
-    for i in nums:
-        arr.append(i)
-        rec(n + 1)
+    for i in range(N):
+        arr.append(nums[i])
+        recursion()
         arr.pop()
 
 
-rec(0)
-print("\n".join(res))
+recursion()

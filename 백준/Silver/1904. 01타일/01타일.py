@@ -1,5 +1,8 @@
 N = int(input())
-DP = [1] * (N + 1)
-for i in range(2, N + 1):
-    DP[i] = (DP[i-1] + DP[i-2]) % 15746
-print(DP[N])
+dp = [0] * (N + 1)
+for i in range(N + 1):
+    if i in [0, 1, 2, 3]:
+        dp[i] = i
+    else:
+        dp[i] = (dp[i - 1] + dp[i - 2]) % 15746
+print(dp[N])

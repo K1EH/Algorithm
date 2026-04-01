@@ -1,8 +1,7 @@
 N = int(input())
 arr = list(map(int, input().split()))
+prefix_sum = [-1e4] * (N + 1)
 
-prefix = [0 for _ in range(N + 1)]
 for i in range(N):
-    prefix[i + 1] = max(arr[i], prefix[i] + arr[i])
-
-print(max(prefix[1:]))
+    prefix_sum[i + 1] = max(arr[i], arr[i] + prefix_sum[i])
+print(max(prefix_sum))

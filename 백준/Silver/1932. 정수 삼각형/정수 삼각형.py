@@ -1,16 +1,15 @@
-H = int(input())
+N = int(input())
+arr = [list(map(int, input().split())) for _ in range(N)]
+dp = [[0] * (N + 1) for _ in range(N + 1)]
 
-dp = []
-for _ in range(H):
-    dp.append(list(map(int, input().split())))
 
-for i in range(1, H):
-    for j in range(i + 1):
-        if j == 0:
-            dp[i][j] += dp[i - 1][j]
-        elif j == i:
-            dp[i][j] += dp[i - 1][j - 1]
+for y in range(N):
+    for x in range(y + 1):
+        if x == 0:
+            dp[y + 1][x + 1] = arr[y][x] + dp[y][x + 1]
+        if x == y:
+            dp[y + 1][x + 1] = arr[y][x] + dp[y][x]
         else:
-            dp[i][j] += max(dp[i - 1][j - 1], dp[i - 1][j])
+            dp[y + 1][x + 1] = arr[y][x] + max(dp[y][x + 1], dp[y][x])
 
-print(max(dp[H - 1]))
+print(max(dp[N]))

@@ -1,12 +1,13 @@
-def fib(n):
-    global count
-    if n == 1 or n == 2:
-        return 1
-    else:
-        count += 1
-        return fib(n - 1) + fib(n - 2)
+N = int(input())
 
-n = int(input())
-count = 1
-fib(n)
-print(count, n - 2)
+dp = [0] * (N + 1)
+dp[1], dp[2] = 1, 1
+
+
+def fib(N):
+    for i in range(3, N + 1):
+        dp[i] = dp[i - 1] + dp[i - 2]
+    return dp[N]
+
+
+print(fib(N), N - 2)
